@@ -48,7 +48,12 @@
 		</plugins>
 	</build>
 
+<!--	<scm>-->
+<!--		<developerConnection>scm:git:git@github.com:SehajparkashSingh-BY/sfg-pet-clinic.git</developerConnection>-->
+<!--	</scm>-->
 	<scm>
-		<developerConnection>scm:git:https://github.com/SehajparkashSingh-BY/sfg-pet-clinic.git</developerConnection>
+		<url>git@github.com/SehajparkashSingh-BY/sfg-pet-clinic.git</url>
+		<connection>scm:git:git@github.com/SehajparkashSingh-BY/sfg-pet-clinic.git</connection>
+		<developerConnection>scm:git:git@github.com/SehajparkashSingh-BY/sfg-pet-clinic.git</developerConnection>
 	</scm>
 </project>
