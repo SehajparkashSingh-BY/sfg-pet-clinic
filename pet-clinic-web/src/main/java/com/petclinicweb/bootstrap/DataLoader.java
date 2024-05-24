@@ -7,8 +7,6 @@ import services.OwnerService;
 import services.PetTypeService;
 import services.SpecialityService;
 import services.VetService;
-import services.map.OwnerServiceMap;
-import services.map.VetServiceMap;
 
 import java.time.LocalDate;
 
@@ -20,7 +18,7 @@ public class DataLoader implements CommandLineRunner {
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
 
-    public DataLoader(OwnerService ownerService, VetServiceMap vetService, PetTypeService petTypeService, SpecialityService specialityService){
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService){
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
@@ -30,6 +28,12 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        int count = petTypeService.findAll().size();
+        if (count == 0) {
+            loadData();
+        }
+    }
+    private void loadData() {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
