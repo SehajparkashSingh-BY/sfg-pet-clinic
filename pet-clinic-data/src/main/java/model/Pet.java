@@ -1,8 +1,24 @@
 package model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "pets")
 public class Pet extends BaseEntity{
+
+    @Column(name = "name")
+    private String name;
+    @ManyToOne
+    @JoinColumn(name = "type_id")  //name of other foreign key column
+    private PetType petType;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")  //name of other foreign key column
+    private Owner owner;
+    @Column(name = "bith_date")
+    private LocalDate birthDate;
 
     public String getName() {
         return name;
@@ -11,11 +27,6 @@ public class Pet extends BaseEntity{
     public void setName(String name) {
         this.name = name;
     }
-
-    private String name;
-    private PetType petType;
-    private Owner owner;
-    private LocalDate birthdate;
 
     public PetType getPetType() {
         return petType;
@@ -34,10 +45,10 @@ public class Pet extends BaseEntity{
     }
 
     public LocalDate getBirthdate() {
-        return birthdate;
+        return birthDate;
     }
 
     public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+        this.birthDate = birthdate;
     }
 }
