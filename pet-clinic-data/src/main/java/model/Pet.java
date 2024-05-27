@@ -44,11 +44,11 @@ public class Pet extends BaseEntity{
         this.owner = owner;
     }
 
-    public LocalDate getBirthdate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthDate(LocalDate birthdate) {
         this.birthDate = birthdate;
     }
 }
