@@ -3,6 +3,8 @@ package model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "pets")
@@ -14,11 +16,14 @@ public class Pet extends BaseEntity{
     @JoinColumn(name = "type_id")  //name of other foreign key column
     private PetType petType;
 
-    @ManyToOne
+    @ManyToOne            //uni-directional
     @JoinColumn(name = "owner_id")  //name of other foreign key column
     private Owner owner;
     @Column(name = "bith_date")
     private LocalDate birthDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    private Set<Visit> visits = new HashSet<>();
 
     public String getName() {
         return name;
@@ -50,5 +55,13 @@ public class Pet extends BaseEntity{
 
     public void setBirthDate(LocalDate birthdate) {
         this.birthDate = birthdate;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }
