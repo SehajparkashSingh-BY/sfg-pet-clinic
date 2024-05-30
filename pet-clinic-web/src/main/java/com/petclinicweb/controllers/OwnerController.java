@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import services.OwnerService;
-import services.map.OwnerServiceMap;
+import services.map.OwnerMapService;
 
 @RequestMapping("owners")
 @Controller
@@ -12,7 +12,7 @@ public class OwnerController {
 
     private final OwnerService ownerService;
 
-    public OwnerController(OwnerServiceMap ownerService){
+    public OwnerController(OwnerMapService ownerService){
         this.ownerService = ownerService;
     }
     @RequestMapping({"","/index","/index.html"})
