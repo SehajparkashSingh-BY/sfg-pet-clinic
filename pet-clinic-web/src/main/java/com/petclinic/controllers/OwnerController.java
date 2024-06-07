@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import com.petclinic.services.OwnerService;
 
@@ -67,5 +64,42 @@ public class OwnerController {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(ownerService.findById(Long.valueOf(ownerId)));
         return mav;
+    }
+
+    @GetMapping("/new")
+    public String createOwner(Model model){
+        model.addAttribute("owner", new Owner());
+        return "owners/createOrUpdateOwnerForm";
+    }
+
+    @PostMapping("/new")
+    //@Valid Owner owner
+    public String saveOwner(@ModelAttribute Owner owner, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return "owners/createOrUpdateOwnerForm";
+        }
+        else {
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/"+ savedOwner.getId();
+        }
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editOwner(@PathVariable Long id, Model model){
+        model.addAttribute("owner",ownerService.findById(id));
+        return "owners/createOrUpdateOwnerForm";
+    }
+
+    @PostMapping("{id}/edit")
+    public String updateOwner(@PathVariable Long id, @ModelAttribute Owner owner, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "owners/createOrUpdateOwnerForm";
+        }
+        else {
+            owner.setId(id);
+            Owner savedOwner = ownerService.save(owner);
+            return "redirect:/owners/"+savedOwner.getId();
+        }
     }
 }

@@ -4,6 +4,7 @@
 <body>
 
 <h2>Owner</h2>
+<!--/*@thymesVar id="owner" type="com.petclinic.model.Owner"*/-->
 <form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
     <div class="form-group has-feedback">
         <input
@@ -21,8 +22,16 @@
         <div class="col-sm-offset-2 col-sm-10">
             <button
                     th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
-                    class="btn btn-default" type="submit" th:text="${text}">Add
-                Owner</button>
+                    class="btn btn-default" type="submit" th:text="${text}">Add Owner
+            </button>
+            <!--
+            This button submits the form.
+            The `th:with` attribute sets a local variable `text`, which changes based on whether the owner is new.
+            - If the `owner` object has a `new` property set to true, `text` will be 'Add Owner'.
+            - Otherwise, `text` will be 'Update Owner'.
+            The `th:text` attribute dynamically sets the button's text based on the `text` variable.
+            The default text 'Add Owner' is a fallback for browsers or tools that do not process Thymeleaf.
+            -->
         </div>
     </div>
 </form>
